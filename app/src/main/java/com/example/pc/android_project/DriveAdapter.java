@@ -41,6 +41,9 @@ public class DriveAdapter extends ArrayAdapter<DriveVO> {
 
         DriverHolder holder = (DriverHolder) convertView.getTag();
 
+        /*
+            'item.xml'에 있는 요소들의 id 불러와 저장하는 과정
+         */
         TextView wordView = holder.wordView;
         TextView meanView = holder.meanView;
 
