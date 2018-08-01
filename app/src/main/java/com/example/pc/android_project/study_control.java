@@ -23,7 +23,7 @@ public class study_control extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(study_control.this, word_control.class);
+                Intent intent = new Intent(study_control.this, wordmenu_control.class);
 
                 startActivity(intent);
             }
