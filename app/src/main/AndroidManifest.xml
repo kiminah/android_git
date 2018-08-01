@@ -18,7 +18,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".study_control"/>
+        <activity android:name=".wordmenu_control"/>
         <activity android:name=".word_control"/>
+        <activity android:name=".scriptmenu_control"/>
+        <activity android:name=".script_control"/>
+
     </application>
 
 </manifest>

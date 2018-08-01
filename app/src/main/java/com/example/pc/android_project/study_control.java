@@ -29,6 +29,15 @@ public class study_control extends AppCompatActivity {
             }
         });
 
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(study_control.this, scriptmenu_control.class);
+
+                startActivity(intent);
+            }
+        });
+
 
     }
 }
