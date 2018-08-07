@@ -33,9 +33,10 @@ public class scriptmenu_control extends AppCompatActivity {
                 /** int i 는 클릭한 항목의 순번
                  * long l 는 항목의 아이디  */
 
+                Integer list_ary = i;
                 Intent intent = new Intent(getApplicationContext(), script_control.class);
 
-                intent.putExtra("list_menu", i);
+                intent.putExtra("list_menu", list_ary);
 
                 startActivity(intent);
 
