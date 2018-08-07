@@ -45,25 +45,19 @@ public class script_control extends AppCompatActivity {
                 qu += cursor.getString(0) + "\r\n";
                 an += cursor.getString(1) + "\r\n";
             }
-            question.setText(qu);
-            answer.setText(an);
-
-            db.close();
-            helper.close();
-
         } else if (num == 1) {
             cursor = db.rawQuery("SELECT * FROM script_02TB", null);
             while (cursor.moveToNext()) {
                 qu += cursor.getString(0) + "\r\n";
                 an += cursor.getString(1) + "\r\n";
             }
-            question.setText(qu);
-            answer.setText(an);
-
-            db.close();
-            helper.close();
         }
 
+        question.setText(qu);
+        answer.setText(an);
+
+        db.close();
+        helper.close();
 
     }
 }
