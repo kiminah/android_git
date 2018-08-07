@@ -34,15 +34,28 @@ public class script_control extends AppCompatActivity {
 
 
         /** DBHelper.java 에서 불러온 DB의 SQL문 작성 */
-        Cursor cursor = db.rawQuery("SELECT * FROM scriptTB", null);
+        Cursor cursor;
 
         String qu = "";
         String an = "";
 
-        if (num == 1) {
+        if (num == 0) {
+            cursor = db.rawQuery("SELECT * FROM script_01TB", null);
             while (cursor.moveToNext()) {
-                qu += cursor.getString(0);
-                an += cursor.getString(1);
+                qu += cursor.getString(0) + "\r\n";
+                an += cursor.getString(1) + "\r\n";
+            }
+            question.setText(qu);
+            answer.setText(an);
+
+            db.close();
+            helper.close();
+
+        } else if (num == 1) {
+            cursor = db.rawQuery("SELECT * FROM script_02TB", null);
+            while (cursor.moveToNext()) {
+                qu += cursor.getString(0) + "\r\n";
+                an += cursor.getString(1) + "\r\n";
             }
             question.setText(qu);
             answer.setText(an);
