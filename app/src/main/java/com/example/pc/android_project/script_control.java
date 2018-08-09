@@ -1,20 +1,29 @@
 package com.example.pc.android_project;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-
 public class script_control extends AppCompatActivity {
 
-    TextView question, answer;
+    TextView question, answer, ex;
+    Button btnNext;
+    DBHelper helper = new DBHelper(this);
+    Cursor cursor;
+    SQLiteDatabase db;
+
+    String qu = "";
+    String an = "";
+
+    /**
+     * DB 테이블 id 증가시켜주는 변수
+     */
+    Integer p = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,41 +32,102 @@ public class script_control extends AppCompatActivity {
 
         question = (TextView) findViewById(R.id.question);
         answer = (TextView) findViewById(R.id.answer);
+        ex = (TextView) findViewById(R.id.view);
+
+        btnNext = (Button) findViewById(R.id.btnNext);
 
         Bundle bundle = getIntent().getExtras();
         Integer num = bundle.getInt("list_menu");
 
-        // question.setText(ary);
-        DBHelper helper = new DBHelper(this);
+        db = helper.getWritableDatabase();
 
-        SQLiteDatabase db = helper.getWritableDatabase();
-
-
-        /** DBHelper.java 에서 불러온 DB의 SQL문 작성 */
-        Cursor cursor;
-
-        String qu = "";
-        String an = "";
-
+        /** 리스트 <1. 인사>를 선택했을 경우 */
         if (num == 0) {
-            cursor = db.rawQuery("SELECT * FROM script_01TB", null);
+            cursor = db.rawQuery("SELECT question, answer FROM script_01TB WHERE _id == 1", null);
             while (cursor.moveToNext()) {
-                qu += cursor.getString(0) + "\r\n";
-                an += cursor.getString(1) + "\r\n";
+                qu = cursor.getString(0);
+                an = cursor.getString(1);
             }
+            btnNext.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    db = helper.getWritableDatabase();
+                    ++p;
+                    if (p > 4)
+                        p = 1;
+                    cursor = db.rawQuery("SELECT question, answer FROM script_01TB WHERE _id == " + p, null);
+                    while (cursor.moveToNext()) {
+                        qu = cursor.getString(0);
+                        an = cursor.getString(1);
+                    }
+                    question.setText(qu);
+                    answer.setText(an);
+
+                    cursor.close();
+                    db.close();
+                }
+            });
+
+            /** 리스트 <2. 대중교통>을 선택했을 경우 */
         } else if (num == 1) {
-            cursor = db.rawQuery("SELECT * FROM script_02TB", null);
+            cursor = db.rawQuery("SELECT question, answer FROM script_02TB WHERE _id == 1", null);
             while (cursor.moveToNext()) {
-                qu += cursor.getString(0) + "\r\n";
-                an += cursor.getString(1) + "\r\n";
+                qu = cursor.getString(0);
+                an = cursor.getString(1);
             }
+            btnNext.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    db = helper.getWritableDatabase();
+                    ++p;
+                    if (p > 4)
+                        p = 1;
+                    cursor = db.rawQuery("SELECT question, answer FROM script_02TB WHERE _id == " + p, null);
+                    while (cursor.moveToNext()) {
+                        qu = cursor.getString(0);
+                        an = cursor.getString(1);
+                    }
+                    question.setText(qu);
+                    answer.setText(an);
+
+                    cursor.close();
+                    db.close();
+                }
+            });
+            /** 리스트 <3. 마트(시장)>을 선택했을 경우 */
+        } else {
+            cursor = db.rawQuery("SELECT question, answer FROM script_03TB WHERE _id == 1", null);
+            while (cursor.moveToNext()) {
+                qu = cursor.getString(0);
+                an = cursor.getString(1);
+            }
+            btnNext.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    db = helper.getWritableDatabase();
+                    ++p;
+                    if (p > 2)
+                        p = 1;
+                    cursor = db.rawQuery("SELECT question, answer FROM script_03TB WHERE _id == " + p, null);
+                    while (cursor.moveToNext()) {
+                        qu = cursor.getString(0);
+                        an = cursor.getString(1);
+                    }
+                    question.setText(qu);
+                    answer.setText(an);
+
+                    cursor.close();
+                    db.close();
+                }
+            });
         }
 
+        /** 첫 대화화면 출력 */
         question.setText(qu);
         answer.setText(an);
 
+        cursor.close();
         db.close();
-        helper.close();
 
     }
 }
