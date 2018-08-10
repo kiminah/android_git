@@ -38,6 +38,15 @@ public class study_control extends AppCompatActivity {
             }
         });
 
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(study_control.this, etiquette_menu_control.class);
+
+                startActivity(intent);
+            }
+        });
+
 
     }
 }

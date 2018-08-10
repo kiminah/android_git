@@ -22,6 +22,8 @@
         <activity android:name=".word_control"/>
         <activity android:name=".scriptmenu_control"/>
         <activity android:name=".script_control"/>
+        <activity android:name=".etiquette_menu_control"/>
+        <activity android:name=".etiquette_control"/>
 
     </application>
 
