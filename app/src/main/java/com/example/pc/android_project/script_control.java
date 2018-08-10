@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 public class script_control extends AppCompatActivity {
 
-    TextView question, answer, ex;
+    TextView question, answer;
     Button btnNext;
     DBHelper helper = new DBHelper(this);
     Cursor cursor;
@@ -32,7 +32,6 @@ public class script_control extends AppCompatActivity {
 
         question = (TextView) findViewById(R.id.question);
         answer = (TextView) findViewById(R.id.answer);
-        ex = (TextView) findViewById(R.id.view);
 
         btnNext = (Button) findViewById(R.id.btnNext);
 
